@@ -28,33 +28,46 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpack_compose_setup.ui.theme.Jetpack_compose_setupTheme
+import org.w3c.dom.Text
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         //setContent {
-            //Column(modifier = Modifier
-                //.width(200.dp)
-                //.height(400.dp)
-                //.fillMaxSize(0.5f) in complete screen
-                //.fillMaxHeight(0.8f)
-                //.background(Color.Green),
-                //horizontalAlignment = Alignment.CenterHorizontally,
-                //verticalArrangement = Arrangement.SpaceEvenly
-                //these alignment and arrangements factors will be changed in case of ROW
-            //) {
-                //Text("hello")
-                //Text("potatomioo")
-            //}
+        //Column(modifier = Modifier
+        //.width(200.dp)
+        //.height(400.dp)
+        //.fillMaxSize(0.5f) in complete screen
+        //.fillMaxHeight(0.8f)
+        //.background(Color.Green),
+        //horizontalAlignment = Alignment.CenterHorizontally,
+        //verticalArrangement = Arrangement.SpaceEvenly
+        //these alignment and arrangements factors will be changed in case of ROW
+        //) {
+        //Text("hello")
+        //Text("potatomioo")
+        //}
         //}
 
         //new setContent
@@ -92,68 +105,141 @@ class MainActivity : ComponentActivity() {
 //            }
 //        }
 
-        //new setContent
 
-        setContent(){
-            val image1 = painterResource(id = R.drawable.eve)
-            val image2 = painterResource(id = R.drawable.night)
-            val image3 = painterResource(id = R.drawable.isl)
-            val content = "Evening"
-            val titlegiven1 = "Evening is Beautiful"
-            val titlegiven2 = "night is Beautiful"
-            val titlegiven3 = "this is Beautiful"
-            Column {
-                Row{
-                ImageCard(
-                    painter = image1,
-                    contentDes = content,
-                    title = titlegiven1
-                )
-                ImageCard(
-                    painter = image2,
-                    contentDes = content,
-                    title = titlegiven2
-                )}
-                Spacer(modifier = Modifier.height(2.dp))
-                ImageCard(
-                    painter = image3,
-                    contentDes = content,
-                    title = titlegiven3
-                )
+        //Image Card And Styling
 
-            }
-        }
-    }
-}
 
-@Composable
-fun ImageCard(
-    painter:Painter,
-    contentDes:String,
-    title:String,
-    modifier: Modifier = Modifier
-){
-    Card(
-        modifier = modifier.fillMaxWidth(0.5f),
-        shape = RoundedCornerShape(20.dp)
-    ) {
-        //box is a simply container which contains modifiers for rows and columns
-        Box(modifier = Modifier.height(200.dp)){
-            Image(
-                painter = painter,
-                contentDescription = contentDes,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-                )
+//        setContent {
+//            val image = painterResource(id = R.drawable.brighter)
+//            //val image1 = painterResource(id = R.drawable.eve)
+//            //val image2 = painterResource(id = R.drawable.night)
+//            //val image3 = painterResource(id = R.drawable.isl)
+//            val content = "Evening"
+//            val titlegiven = "This is Beautiful"
+//            //val titlegiven1 = "Evening is Beautiful"
+//            //val titlegiven2 = "night is Beautiful"
+//            //val titlegiven3 = "beach is Beautiful"
+//            // Column and Row approach
+//            //Column {
+//                //Row{
+//                //ImageCard(
+//                    //painter = image1,
+//                    //contentDes = content,
+//                    //title = titlegiven1
+//                //)
+//                //ImageCard(
+//                    //painter = image2,
+//                    //contentDes = content,
+//                    //title = titlegiven2
+//                //)}
+//                //Spacer(modifier = Modifier.height(2.dp))
+//                //ImageCard(
+//                    //painter = image3,
+//                    //contentDes = content,
+//                    //title = titlegiven3
+//                //)
+//
+//            Box(modifier = Modifier
+//                .fillMaxSize(0.5f)
+//                .padding(10.dp)
+//            ) {
+//                ImageCard(
+//                    painter = image,
+//                    contentDes = content,
+//                    title = titlegiven
+//                )
+//            }
+//        }
+//    }
+//}
+//
+//@Composable
+//fun ImageCard(
+//    painter:Painter,
+//    contentDes:String,
+//    title:String,
+//    modifier: Modifier = Modifier
+//){
+//    Card(
+//        modifier = modifier.fillMaxWidth(),
+//        shape = RoundedCornerShape(20.dp)
+//    ) {
+//        //box is a simply container which contains modifiers for rows and columns
+//        Box(modifier = Modifier.height(200.dp)){
+//            Image(
+//                painter = painter,
+//                contentDescription = contentDes,
+//                contentScale = ContentScale.Crop,
+//                modifier = Modifier.fillMaxSize()
+//                )
+//            Box(modifier = Modifier
+//                .fillMaxSize()
+//                .background(
+//                    Brush.verticalGradient(
+//                        colors = listOf(
+//                            Color.Transparent,
+//                            Color.Black
+//                        ),
+//                        startY = 300f
+//                    )
+//                )
+//            )
+//            Box(modifier = Modifier
+//                .fillMaxSize()
+//                .padding(12.dp),
+//                contentAlignment = Alignment.BottomStart){
+//                Text(text = title, style = TextStyle(color = Color.White, fontSize = 15.sp))
+//            }
+//        }
+//    }
+//}
+
+
+        //Styling the Font
+
+
+        val fontFamily = FontFamily(
+            Font(R.font.lthin, FontWeight.Thin),
+//            Font(R.font.LBold, FontWeight.Bold),
+//            Font(R.font.LExtraBold, FontWeight.ExtraBold),
+//            Font(R.font.LExtraLight, FontWeight.ExtraLight),
+//            Font(R.font.LMedium, FontWeight.Medium),
+//            Font(R.font.LRegular, FontWeight.Normal),
+//            Font(R.font.LSemiBold, FontWeight.SemiBold),
+//            Font(R.font.LLight, FontWeight.Light)
+        )
+
+        setContent {
             Box(modifier = Modifier
                 .fillMaxSize()
-                .padding(12.dp),
-                contentAlignment = Alignment.BottomStart){
-                Text(text = title, style = TextStyle(color = Color.White, fontSize = 15.sp))
+                .background(color = Color.DarkGray)
+            ){
+                Text(text = buildAnnotatedString {
+                                                 withStyle(
+                                                     style = SpanStyle(
+                                                         color = Color.Magenta,
+                                                         fontSize = 50.sp
+                                                     )
+                                                 ){
+                                                     append("P")
+                                                 }
+                    append("otatomioo")
+                },
+                    color = Color.Black,
+                    fontSize = 30.sp,
+                    fontFamily = fontFamily,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    fontStyle = FontStyle.Italic,
+                    textDecoration = TextDecoration.Underline
+                    //Importing Font Style to AS
+                )
             }
         }
+
     }
 }
+
 
 //@Preview(showBackground = true)
 //@Composable
