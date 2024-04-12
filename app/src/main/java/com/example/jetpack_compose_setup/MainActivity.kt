@@ -198,44 +198,52 @@ class MainActivity : ComponentActivity() {
         //Styling the Font
 
 
-        val fontFamily = FontFamily(
-            Font(R.font.lthin, FontWeight.Thin),
-//            Font(R.font.LBold, FontWeight.Bold),
-//            Font(R.font.LExtraBold, FontWeight.ExtraBold),
-//            Font(R.font.LExtraLight, FontWeight.ExtraLight),
-//            Font(R.font.LMedium, FontWeight.Medium),
-//            Font(R.font.LRegular, FontWeight.Normal),
-//            Font(R.font.LSemiBold, FontWeight.SemiBold),
-//            Font(R.font.LLight, FontWeight.Light)
-        )
+//        val fontFamily = FontFamily(
+//            Font(R.font.lthin, FontWeight.Thin),
+//            Font(R.font.lexendbold, FontWeight.Bold),
+//            Font(R.font.lexendextrabold, FontWeight.ExtraBold),
+//            Font(R.font.lexendextralight, FontWeight.ExtraLight),
+//            Font(R.font.lexendmedium, FontWeight.Medium),
+//            Font(R.font.lexendregular, FontWeight.Normal),
+//            Font(R.font.lexendsemibold, FontWeight.SemiBold),
+//            Font(R.font.lexendlight, FontWeight.Light)
+//        )
+//
+//        setContent {
+//            Box(modifier = Modifier
+//                .fillMaxSize()
+//                .background(color = Color.DarkGray)
+//            ){
+//                Text(text = buildAnnotatedString {
+//                                                 withStyle(
+//                                                     style = SpanStyle(
+//                                                         color = Color.Magenta,
+//                                                         fontSize = 50.sp
+//                                                     )
+//                                                 ){
+//                                                     append("P")
+//                                                 }
+//                    append("otatomioo")
+//                },
+//                    color = Color.White,
+//                    fontSize = 30.sp,
+//                    fontFamily = fontFamily,
+//                    fontWeight = FontWeight.Bold,
+//                    textAlign = TextAlign.Center,
+//                    fontStyle = FontStyle.Italic,
+//                    //textDecoration = TextDecoration.Underline
+//                    //Importing Font Style to AS
+//                )
+//            }
+//        }
+//
+//    }
+//}
 
-        setContent {
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(color = Color.DarkGray)
-            ){
-                Text(text = buildAnnotatedString {
-                                                 withStyle(
-                                                     style = SpanStyle(
-                                                         color = Color.Magenta,
-                                                         fontSize = 50.sp
-                                                     )
-                                                 ){
-                                                     append("P")
-                                                 }
-                    append("otatomioo")
-                },
-                    color = Color.Black,
-                    fontSize = 30.sp,
-                    fontFamily = fontFamily,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    fontStyle = FontStyle.Italic,
-                    textDecoration = TextDecoration.Underline
-                    //Importing Font Style to AS
-                )
-            }
-        }
+
+        // new setContent
+
+        
 
     }
 }
