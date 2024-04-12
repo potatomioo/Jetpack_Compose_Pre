@@ -95,13 +95,33 @@ class MainActivity : ComponentActivity() {
         //new setContent
 
         setContent(){
-            val image = painterResource(id = R.drawable.scientists)
-            val content = "Hello Science"
-            val titlegiven = "Science is Future"
-            ImageCard(
-                painter = image,
-                contentDes = content,
-                title = titlegiven)
+            val image1 = painterResource(id = R.drawable.eve)
+            val image2 = painterResource(id = R.drawable.night)
+            val image3 = painterResource(id = R.drawable.isl)
+            val content = "Evening"
+            val titlegiven1 = "Evening is Beautiful"
+            val titlegiven2 = "night is Beautiful"
+            val titlegiven3 = "this is Beautiful"
+            Column {
+                Row{
+                ImageCard(
+                    painter = image1,
+                    contentDes = content,
+                    title = titlegiven1
+                )
+                ImageCard(
+                    painter = image2,
+                    contentDes = content,
+                    title = titlegiven2
+                )}
+                Spacer(modifier = Modifier.height(2.dp))
+                ImageCard(
+                    painter = image3,
+                    contentDes = content,
+                    title = titlegiven3
+                )
+
+            }
         }
     }
 }
@@ -114,7 +134,7 @@ fun ImageCard(
     modifier: Modifier = Modifier
 ){
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(0.5f),
         shape = RoundedCornerShape(20.dp)
     ) {
         //box is a simply container which contains modifiers for rows and columns
@@ -122,7 +142,8 @@ fun ImageCard(
             Image(
                 painter = painter,
                 contentDescription = contentDes,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
                 )
             Box(modifier = Modifier
                 .fillMaxSize()
