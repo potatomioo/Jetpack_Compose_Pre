@@ -1,5 +1,6 @@
 package com.example.jetpack_compose_setup
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -26,6 +27,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -48,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpack_compose_setup.ui.theme.Jetpack_compose_setupTheme
 import org.w3c.dom.Text
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -241,9 +245,47 @@ class MainActivity : ComponentActivity() {
 //}
 
 
-        // new setContent
+        // State in Compose
 
-        
+//        setContent {
+//
+//            ColorBox(Modifier
+//                .fillMaxSize()
+//            )
+//
+//        }
+//
+//    }
+//}
+//
+//@Composable
+//fun ColorBox(modifier: Modifier = Modifier){
+//
+//    val colorstate = remember{      // remember will remember the color of the box last came. When the function will be changed.
+//        mutableStateOf(Color.Yellow)
+//    }
+//
+//    Box(modifier = modifier
+//        .background(colorstate.value)
+//        .clickable {
+//            colorstate.value = Color(
+//                Random.nextFloat(),  // Colors will be selected by their float values so here randomly selecting float
+//                Random.nextFloat(),
+//                Random.nextFloat(),
+//                1f    // default
+//            )
+//        }
+//
+//    )
+//}
+
+
+        // Textfields, Buttons and SnackBars
+
+
+        setContent {
+            
+        }
 
     }
 }
