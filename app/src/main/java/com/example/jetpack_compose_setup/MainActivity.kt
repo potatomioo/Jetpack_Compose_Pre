@@ -4,12 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
@@ -45,13 +50,30 @@ class MainActivity : ComponentActivity() {
         setContent{
             Column(
                 modifier = Modifier
+                    //every statement will be considered sequentially
                     .background(Color.Green)
                     .fillMaxHeight(0.5f)
-                    .width(200.dp)
-                    .requiredWidth(200.dp)
+                    .fillMaxWidth()
+                    .border(10.dp, color = Color.Red)
+                    .padding(10.dp)
+                    .border(10.dp, color = Color.Black)
+                    .padding(10.dp)
+                    .border(10.dp, color = Color.Blue)
+                    .padding(10.dp)
+                // padding maintains the gaps of the container of text. Also we can maintain for all sides individually.
+                //.padding(top=20.dp)
+//                    .requiredWidth(200.dp) this function maintains the width outside the screen too
             ) {
-                Text(text = "heyy")
-                Text(text = "potatomioo")
+                Text(text = "heyy",modifier = Modifier
+                    .border(5.dp, color = Color.Magenta)
+                    .offset(25.dp,25.dp)
+                    .border(5.dp, color = Color.Magenta)
+                    .padding(5.dp)
+                )
+                //offset moves first in X dir then in Y
+                Spacer(modifier = Modifier.height(25.dp))
+                //space between two components
+                Text(text = "potatomioo",modifier = Modifier.offset(25.dp,25.dp))
             }
         }
     }
