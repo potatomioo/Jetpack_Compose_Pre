@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -295,67 +294,6 @@ class MainActivity : ComponentActivity() {
 //}
 
 
-        // Textfields, Buttons and SnackBars
-
-
-        setContent {
-            // Scaffold is a pre defined method for snack bars, buttons and all
-        }
-
-    }
-}
-
-@Composable
-fun screen(){
-    var input by remember {
-        mutableStateOf(" ")
-    }
-    var snackbar by remember {
-        mutableStateOf(false)
-    }
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        TextField(
-            value = input,
-            onValueChange = {input = it},
-            label = { Text(text = "Enter Your Name")},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp, 20.dp)
-        )
-        Button(onClick = {
-            snackbar = true
-        },modifier = Modifier
-            .align(Alignment.CenterHorizontally)
-            .padding(5.dp,2.dp)
-        ) {
-            Text("updated")
-        }
-    }
-    if (snackbar) {
-        Snackbar(snackbarHostState = LocalSnackbarHostState.current, action = {
-                Text("Dismiss") {  // Optional action button
-                    snackbar = false  // Hide snackbar on click
-                }
-            }) {
-            Text(text = "Snackbar message: $input")  // Display entered text
-        }
-    }
-
-    // LaunchedEffect to handle automatic disappearance
-    LaunchedEffect(snackbar) {
-        if (snackbar) {
-            delay(3000) // Delay for 3 seconds (adjust as needed)
-            snackbar = false
-        }
-    }
-}
-
-
         //Text view and button
 
 //                setContent(){
@@ -403,6 +341,14 @@ fun screen(){
 //                }
 //            }
 //        }
+
+
+
+
+
+    }
+}
+
 
 
 //@Preview(showBackground = true)
