@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,13 +23,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.BottomSheetScaffoldState
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -47,13 +56,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpack_compose_setup.ui.theme.Jetpack_compose_setupTheme
 import org.w3c.dom.Text
 import kotlin.random.Random
+import androidx.compose.runtime.*
+import androidx.compose.runtime.LaunchedEffect
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.time.delay
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -284,11 +299,110 @@ class MainActivity : ComponentActivity() {
 
 
         setContent {
-            
+            // Scaffold is a pre defined method for snack bars, buttons and all
         }
 
     }
 }
+
+@Composable
+fun screen(){
+    var input by remember {
+        mutableStateOf(" ")
+    }
+    var snackbar by remember {
+        mutableStateOf(false)
+    }
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        TextField(
+            value = input,
+            onValueChange = {input = it},
+            label = { Text(text = "Enter Your Name")},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp, 20.dp)
+        )
+        Button(onClick = {
+            snackbar = true
+        },modifier = Modifier
+            .align(Alignment.CenterHorizontally)
+            .padding(5.dp,2.dp)
+        ) {
+            Text("updated")
+        }
+    }
+    if (snackbar) {
+        Snackbar(snackbarHostState = LocalSnackbarHostState.current, action = {
+                Text("Dismiss") {  // Optional action button
+                    snackbar = false  // Hide snackbar on click
+                }
+            }) {
+            Text(text = "Snackbar message: $input")  // Display entered text
+        }
+    }
+
+    // LaunchedEffect to handle automatic disappearance
+    LaunchedEffect(snackbar) {
+        if (snackbar) {
+            delay(3000) // Delay for 3 seconds (adjust as needed)
+            snackbar = false
+        }
+    }
+}
+
+
+        //Text view and button
+
+//                setContent(){
+//                    var name by remember { mutableStateOf("") }
+//                    var nameError = false
+//
+//                    MyTextField(
+//                        label = "Enter your name:",
+//                        value = name,
+//                        onValueChange = { name = it },
+//                        isError = nameError,
+//                        errorMessage = "Please enter a valid name"  // Display if nameError is true
+//                    )
+//
+//                }
+//
+//            }
+//        }
+//
+//        @Composable
+//        fun MyTextField(
+//            label: String,
+//            value: String,
+//            onValueChange: (String) -> Unit,
+//            isError: Boolean = false,  // Optional flag for error state
+//            errorMessage: String? = null  // Optional error message
+//        ) {
+//            Column {  // Wrap in a Column for vertical layout
+//                TextField(
+//                    value = value,
+//                    onValueChange = onValueChange,
+//                    label = { Text(text = label) },
+//                    modifier = Modifier
+//                        .fillMaxWidth()  // Make the field fill available width
+//                        .padding(horizontal = 16.dp, vertical = 8.dp),  // Add padding
+//                    isError = isError  // Indicate error state if applicable
+//                )
+//                if (isError && errorMessage != null) {  // Display error message conditionally
+//                    Text(
+//                        text = errorMessage,
+//                        color = Color.Red,
+//                        fontSize = 12.sp,
+//                        modifier = Modifier.padding(start = 16.dp)  // Indent error message
+//                    )
+//                }
+//            }
+//        }
 
 
 //@Preview(showBackground = true)
