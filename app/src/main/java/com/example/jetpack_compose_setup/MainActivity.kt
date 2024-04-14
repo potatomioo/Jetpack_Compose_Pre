@@ -25,6 +25,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Label
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
@@ -344,13 +345,60 @@ class MainActivity : ComponentActivity() {
 
 
 
+        //lets make a textfield
+
+        setContent {
+
+        }
 
 
     }
 }
 
+@Composable
+fun maketextfield(
+    given:String
+){
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(color = Color.White),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
 
 
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {}
+        var textstate = remember {
+            mutableStateOf(" ")
+        }
+        TextField(
+            modifier = Modifier
+            .border(
+                width = 5.dp,
+                brush = Brush.horizontalGradient(listOf(Color.Blue, Color.Black)),
+                shape = RoundedCornerShape(5.dp)
+            ),
+            value = textstate.value,
+            onValueChange = {
+                if (textstate.value.length < 20) textstate.value = it
+            },
+//            supportingText = {
+//                             Text(text = "${textstate.value.length}/20")
+//            },
+            textStyle = TextStyle(
+                color = Color.Black
+            )
+            )
+    }
+}
+
+
+
+
+
+
+
+@Preview(showBackground = true)
+@Composable
+fun MyComposablePreview(){
+    maketextfield(given = "hello")
+}
