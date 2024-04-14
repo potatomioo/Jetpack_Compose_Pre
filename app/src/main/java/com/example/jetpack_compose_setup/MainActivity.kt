@@ -7,16 +7,25 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.*
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -24,7 +33,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.w3c.dom.Text
 
 
 class MainActivity : ComponentActivity() {
@@ -308,7 +316,7 @@ class MainActivity : ComponentActivity() {
         //lets make a textfield
 
         setContent {
-
+            maketextfield(given = "check")
         }
 
 
@@ -322,20 +330,37 @@ fun maketextfield(
     Column(
         Modifier
             .fillMaxSize()
-            .background(color = Color.White), Arrangement.Center, Alignment.CenterHorizontally
+            .background(color = Color.White), Arrangement.Top, Alignment.CenterHorizontally
     ) {
 
-        Text(text = "heyy")
+        Box (
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Start)
+                .requiredHeight(300.dp)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(Color.Blue, Color.Black),
+                        startY = 0f
+                    ),
+                    shape = RoundedCornerShape(
+                        bottomEnd = 40.dp,
+                        bottomStart = 40.dp
+                    )
+                )
+        ){
 
+        }
+        Spacer(modifier = Modifier.height(100.dp))
 
 
         var textstate = remember {
             mutableStateOf(" ")
         }
-        TextField(
+        OutlinedTextField(
             modifier = Modifier
             .border(
-                width = 5.dp,
+                width = 2.dp,
                 brush = Brush.horizontalGradient(listOf(Color.Blue, Color.Black), startX = 0.5f),
                 shape = RoundedCornerShape(5.dp)
             ),
@@ -362,6 +387,49 @@ fun maketextfield(
             }
         )
 
+        Spacer(modifier = Modifier.height(5.dp))
+
+        OutlinedTextField(
+            modifier = Modifier
+                .border(
+                    width = 2.dp,
+                    brush = Brush.horizontalGradient(listOf(Color.Blue, Color.Black), startX = 0.5f),
+                    shape = RoundedCornerShape(5.dp)
+                ),
+            value = textstate.value,
+            onValueChange = {
+                if (textstate.value.length < 20) textstate.value = it
+            },
+//            supportingText = {
+//                             Text(text = "${textstate.value.length}/20")
+//            },
+            textStyle = TextStyle(
+                color = Color.Black
+            ),
+            leadingIcon = {
+                Icon(imageVector = Icons.Filled.Phone, contentDescription = "name"
+                    ,modifier = Modifier
+                        .padding(0.dp)
+                        .background(
+                            color = Color.Black,
+                            shape = RoundedCornerShape(5.dp)
+                        )
+                    ,tint = Color.White
+                )
+            }
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Button(
+            onClick = {
+
+        },modifier = Modifier
+                .border(2.dp, color = Color.White, shape = RoundedCornerShape(20.dp))
+                .height(50.dp)
+                .width(70.dp)
+            ) {}
+
     }
 }
 
@@ -374,5 +442,8 @@ fun maketextfield(
 @Preview(showBackground = true)
 @Composable
 fun MyComposablePreview(){
+
+        maketextfield(given = "hello")
+
     maketextfield(given = "hello")
 }
